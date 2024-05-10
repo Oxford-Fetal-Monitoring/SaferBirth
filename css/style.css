@@ -1,13 +1,13 @@
 body, html {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     height: 100%;
 }
 
-.navbar-logo img {
-    height: 50px;  /* Set the height of your logo */
-    width: auto;  /* Maintain aspect ratio */
-    margin-right: auto; /* This pushes everything else to the right */
+.container {
+    max-width: 800px;
+    margin: auto;
 }
 
 /* Style the navbar */
@@ -15,15 +15,20 @@ nav {
     background-color: #7DA3A3; /* Navbar background color */
     height: 66px;              /* Navbar height */
     display: flex;             /* Use Flexbox */
-    justify-content: flex-end; /* Align items to the right */
+    justify-content: space-between; /* Align items to the right */
     align-items: center;       /* Center items vertically */
-    padding-right: 150px;       /* Add some padding to the right */
-    padding-left: 150px;
+    padding: 0 200px;
     position: fixed;           /* Fix position relative to the viewport */
     top: 0;                    /* Align top edge to the top of the viewport */
     left: 0;                   /* Align left edge to the left of the viewport */
     right: 0;                  /* Align right edge to the right of the viewport */
     z-index: 1000;             /* Ensure navbar stays on top of other content */
+}
+
+.navbar-logo img {
+    height: auto;  /* Maintain aspect ratio */
+    width: 85px;  /* Set the width of your logo */
+    margin-right: auto; /* This pushes everything else to the right */
 }
 
 /* Remove default list styling and set horizontal layout */
@@ -45,7 +50,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;     /* Remove underline from links */
     color: white;              /* Link text color */
-    padding: 10px 20px;        /* Padding around links */
+    padding: 10px 40px;        /* Padding around links */
     display: inline-block;     /* Inline block to respect padding */
     line-height: 66px;         /* Center text vertically relative to navbar height */
 }
@@ -87,6 +92,47 @@ nav ul li a {
     text-align: center;
 }
 
+.arrow-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px; /* Spacing between each section */
+    margin-top: 40px;
+}
+
+.rectangle {
+    height: 100px;
+    width: 300px; /* Increased width to accommodate text */
+    background-color: #7DA3A3;
+    color: white; /* Text color */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center text horizontally and vertically */
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-left: 100px solid #7DA3A3;
+    border-bottom: 50px solid transparent;
+    padding-right: 40px;
+}
+
+.text {
+    padding-left: 20px; /* Space between arrow and text */
+    flex: 1; /* Take remaining space */
+    font-size: 30px;
+    font-weight: 500;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.intro h1, h2 {
+    padding-bottom: 5vh ;
+}
+
 /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
     .burger {
@@ -95,12 +141,12 @@ nav ul li a {
     }
 
     nav {
-        padding-left: 50px;
-        padding-right: 50px;
+        padding: 0 25px;
     }
 
-    .navbar-logo {
-        margin-right: auto; /* Ensure logo stays on the left with no additional right margin */
+    .navbar-logo img{
+        width: 75px;  /* Maintain aspect ratio */
+        height: auto;  /* Set the height of your logo */
     }
 
     #nav-links {
@@ -113,11 +159,11 @@ nav ul li a {
         overflow: hidden;  /* Hide overflow */
         background-color: #7DA3A3;  /* Background color same as navbar for consistency */
         z-index: 1000;  /* Ensure it's on top of other content */
-        transition: height 0.4s ease; /* Animate width */
+        transition: all 0.4s ease; /* Animate width */
     }
 
     #nav-links.nav-active {
-        height: 100vh;  /* Full width when active */
+        height: calc(100vh - 66px); /* Full height minus navbar height */
     }
 
     nav ul li {
@@ -136,5 +182,40 @@ nav ul li a {
         text-transform: uppercase;  /* Convert text to uppercase */
         font-size: 18px;  /* Optional: Increase font size for better readability */
         display: block;  /* Ensure the clickable area extends fully */
+    }
+
+    .arrow-section {
+        flex-direction: row;  /* Ensure elements are in a row */
+        justify-content: start;  /* Align elements to the start */
+        align-items: center;  /* Center elements vertically */
+    }
+
+    .rectangle, .triangle-right, .text {
+        display: inline-block;  /* Use inline-block for horizontal alignment */
+        vertical-align: middle;  /* Align elements vertically */
+    }
+
+    .rectangle {
+        width: 25%;  /* Adjust width for better responsiveness */
+        height: 50px;  /* Set a fixed height for consistency */
+        font-size: 16px;  /* Adjust font size for mobile */
+        display: flex;  /* Use flexbox for easier centering */
+        align-items: center;  /* Center content vertically */
+        justify-content: center;  /* Center content horizontally */
+        background-color: #7DA3A3;  /* Background color */
+        color: white;  /* Text color */
+        font-weight: bold;  /* Bold font for better readability */
+    }
+
+    .triangle-right {
+        border-top: 25px solid transparent;  /* Adjust triangle size */
+        border-left: 50px solid #7DA3A3;  /* Adjust triangle size */
+        border-bottom: 25px solid transparent;  /* Adjust triangle size */
+        margin-right: 10px;  /* Space between triangle and text */
+    }
+
+    .text {
+        flex: 1;  /* Take remaining space */
+        font-size: 16px;  /* Adjust font size */
     }
 }
