@@ -1,0 +1,140 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.navbar-logo img {
+    height: 50px;  /* Set the height of your logo */
+    width: auto;  /* Maintain aspect ratio */
+    margin-right: auto; /* This pushes everything else to the right */
+}
+
+/* Style the navbar */
+nav {
+    background-color: #7DA3A3; /* Navbar background color */
+    height: 66px;              /* Navbar height */
+    display: flex;             /* Use Flexbox */
+    justify-content: flex-end; /* Align items to the right */
+    align-items: center;       /* Center items vertically */
+    padding-right: 150px;       /* Add some padding to the right */
+    padding-left: 150px;
+    position: fixed;           /* Fix position relative to the viewport */
+    top: 0;                    /* Align top edge to the top of the viewport */
+    left: 0;                   /* Align left edge to the left of the viewport */
+    right: 0;                  /* Align right edge to the right of the viewport */
+    z-index: 1000;             /* Ensure navbar stays on top of other content */
+}
+
+/* Remove default list styling and set horizontal layout */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    margin-left: auto; /* This ensures the list itself is pushed to the right of the navbar */
+    padding: 0;
+    display: flex;             /* Use Flexbox for the list */
+}
+
+/* Style list items */
+nav ul li {
+    margin: 0px;            /* Space between items */
+}
+
+
+/* Style the links */
+nav ul li a {
+    text-decoration: none;     /* Remove underline from links */
+    color: white;              /* Link text color */
+    padding: 10px 20px;        /* Padding around links */
+    display: inline-block;     /* Inline block to respect padding */
+    line-height: 66px;         /* Center text vertically relative to navbar height */
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+.toggle div:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle div:nth-child(2) {
+    opacity: 0;
+}
+
+.toggle div:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.hero {
+    height: 100vh;
+    background: url('../images/suitcase-baby-background.jpg') no-repeat center center/cover;
+    background-attachment: fixed;
+}
+
+#mission {
+    background-color: #f4f4f4;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+    .burger {
+        display: block;
+        z-index: 1500;  /* Ensure burger is above the full-screen menu */
+    }
+
+    nav {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    .navbar-logo {
+        margin-right: auto; /* Ensure logo stays on the left with no additional right margin */
+    }
+
+    #nav-links {
+        flex-direction: column;
+        width: 100%;  /* Start width at 0 for animation */
+        height: 0;  /* Full viewport height */
+        position: fixed;  /* Fixed position */
+        top: 66px;  /* Align to the top */
+        left: 0;  /* Align to the left */
+        overflow: hidden;  /* Hide overflow */
+        background-color: #7DA3A3;  /* Background color same as navbar for consistency */
+        z-index: 1000;  /* Ensure it's on top of other content */
+        transition: height 0.4s ease; /* Animate width */
+    }
+
+    #nav-links.nav-active {
+        height: 100vh;  /* Full width when active */
+    }
+
+    nav ul li {
+        opacity: 0;  /* Initially hide the items for animation */
+        transition: opacity 0.5s ease 0.4s; /* Delay the opacity transition until width is done */
+    }
+
+    #nav-links.nav-active li {
+        opacity: 1;  /* Show the items when menu is active */
+    }
+
+    nav ul li a {
+        padding: 0px 40px;  /* Adjust padding to not align completely to the left */
+        text-align: left;  /* Align text to the left */
+        font-weight: bold;  /* Make text bold */
+        text-transform: uppercase;  /* Convert text to uppercase */
+        font-size: 18px;  /* Optional: Increase font size for better readability */
+        display: block;  /* Ensure the clickable area extends fully */
+    }
+}
