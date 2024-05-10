@@ -184,10 +184,15 @@ nav ul li a {
         display: block;  /* Ensure the clickable area extends fully */
     }
 
+    .container {
+        width: 100%;
+    }
+
     .arrow-section {
         flex-direction: row;  /* Ensure elements are in a row */
         justify-content: start;  /* Align elements to the start */
         align-items: center;  /* Center elements vertically */
+        margin-bottom: 0px;
     }
 
     .rectangle, .triangle-right, .text {
@@ -197,7 +202,7 @@ nav ul li a {
 
     .rectangle {
         width: 25%;  /* Adjust width for better responsiveness */
-        height: 50px;  /* Set a fixed height for consistency */
+        height: 40px;  /* Set a fixed height for consistency */
         font-size: 16px;  /* Adjust font size for mobile */
         display: flex;  /* Use flexbox for easier centering */
         align-items: center;  /* Center content vertically */
@@ -208,14 +213,21 @@ nav ul li a {
     }
 
     .triangle-right {
-        border-top: 25px solid transparent;  /* Adjust triangle size */
-        border-left: 50px solid #7DA3A3;  /* Adjust triangle size */
-        border-bottom: 25px solid transparent;  /* Adjust triangle size */
-        margin-right: 10px;  /* Space between triangle and text */
+        border-top: 20px solid transparent;  /* Adjust triangle size */
+        border-left: 40px solid #7DA3A3;  /* Adjust triangle size */
+        border-bottom: 20px solid transparent;  /* Adjust triangle size */
+        padding-right: 10px;
     }
 
     .text {
         flex: 1;  /* Take remaining space */
-        font-size: 16px;  /* Adjust font size */
+        text-align: justify;
+        text-justify: inter-word;
+        hyphens: auto;
+        word-wrap: break-word;
+        font-size: 16px;  /* Consider if increasing slightly helps */
+        line-height: 1.6;  /* Adjust line height for better flow */
+        letter-spacing: -0.05em;  /* Slight adjustment if needed */
+        padding-left: 12px; /* Space between arrow and text */
     }
 }
