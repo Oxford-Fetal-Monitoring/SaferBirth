@@ -86,16 +86,21 @@ nav ul li a {
     background-attachment: fixed;
 }
 
+#home {
+    opacity: 1; 
+}
+
 #mission {
     background-color: #f4f4f4;
     padding: 20px;
     text-align: center;
+    opacity: 0;
 }
 
 .arrow-section {
     display: flex;
     align-items: center;
-    margin-bottom: 50px; /* Spacing between each section */
+    margin-bottom: 150px; /* Spacing between each section */
     margin-top: 40px;
 }
 
