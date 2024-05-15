@@ -3,11 +3,13 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
+    background: #f4f4f4; /* Sets a default background color that matches your sections */
 }
 
 .container {
-    max-width: 800px;
+    max-width: 80%;
     margin: auto;
+    padding: 20px 0;
 }
 
 /* Style the navbar */
@@ -138,6 +140,60 @@ nav ul li a {
     padding-bottom: 5vh ;
 }
 
+#our-team {
+    text-align: center;
+    margin: auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+#our-team h1 {
+    padding-bottom: 50px;
+}
+
+.team-member {
+    margin-bottom: 40px; /* Space between each team member */
+    text-align: center;
+}
+
+.team-member img {
+    width: 150px; /* Adjust size as needed */
+    height: 150px; /* Maintain aspect ratio */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    margin-bottom: 10px; /* Adds space below the image */
+}
+
+.team-member h1, .team-member h2, .team-member h3, .team-member p {
+    margin: 10px 0; /* Vertical spacing */
+    padding-bottom: 10px;
+}
+
+.team-member p {
+    flex: 1; /* Take remaining space */
+    text-align: justify;
+    text-justify: inter-word;
+    font-size: large;
+    color: #666;
+    line-height: 1.4;
+    margin-top: 10px; /* Increased top margin between paragraphs */
+    margin-bottom: 10px; /* Increased bottom margin for spacing */
+    padding: 0 15px; /* Optional: Adds padding to each side */
+    max-width: 90%; /* Optionally restrict the width of paragraphs */
+    margin-left: auto; /* Center the paragraph if max-width is less than 100% */
+    margin-right: auto; /* Center the paragraph if max-width is less than 100% */
+}
+
+.positions-text {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#mission, #our-team {
+    padding-top: 80px;  /* Adjust this value based on the height of your navbar */
+    margin-top: -80px;  /* This should be the same value as padding-top but negative */
+}
+
 /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
     .burger {
@@ -191,6 +247,7 @@ nav ul li a {
 
     .container {
         width: 100%;
+        padding: 0 10px;
     }
 
     .arrow-section {
@@ -234,5 +291,22 @@ nav ul li a {
         line-height: 1.6;  /* Adjust line height for better flow */
         letter-spacing: -0.05em;  /* Slight adjustment if needed */
         padding-left: 12px; /* Space between arrow and text */
+    }
+
+    .team-member {
+        flex-basis: 100%; /* Each member takes full width on small screens */
+        margin-bottom: 60px;
+    }
+
+    .team-member p {
+        flex: 1; /* Take remaining space */
+        text-align: justify;
+        text-justify: inter-word;
+        font-size: large;
+        color: #666;
+        line-height: 1.4;
+        margin-top: 10px; /* Increased top margin between paragraphs */
+        margin-bottom: 10px; /* Increased bottom margin for spacing */
+        max-width: 100%; /* Optionally restrict the width of paragraphs */
     }
 }

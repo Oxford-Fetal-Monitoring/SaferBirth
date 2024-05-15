@@ -19,35 +19,43 @@ document.addEventListener('DOMContentLoaded', function () {
         burger.classList.remove('toggle');
     }));
 
-    // Create a scene for when the user scrolls to the end of the hero section
+    var homeMissionTimeline = gsap.timeline();
+    homeMissionTimeline.fromTo("#home", {opacity: 1}, {opacity: 0})
+                       .fromTo("#mission", {opacity: 0}, {opacity: 1}, "start+=0.001");
+
     new ScrollMagic.Scene({
-        triggerElement: "#home", // point of execution
-        duration: "100%", // pin the element for the window height - 1
-        triggerHook: 0 // don't trigger until #home hits the top of the viewport
+        triggerElement: "#home",
+        duration: "100%",
+        triggerHook: 0
     })
-    .setTween(gsap.timeline()
-        .fromTo("#home", {opacity: 1}, {opacity: 0}, "start")  // Fade out the hero section
-        .fromTo("#mission", {opacity: 0}, {opacity: 1}, "start+=0.001")  // Fade in the mission section
-    )
-    .addTo(controller);  // assign the scene to the controller
+    .setTween(homeMissionTimeline)
+    .addTo(controller);
 
-     // Create a timeline for sequential animations
-     var missionTimeline = gsap.timeline();
+    var missionTimeline = gsap.timeline();
+    missionTimeline.fromTo("#mission .intro", {opacity: 0}, {opacity: 1, duration: 0.5});
+    document.querySelectorAll("#mission .arrow-section").forEach((section, index) => {
+        missionTimeline.fromTo(section, {opacity: 0}, {opacity: 1, duration: 0.5}, `+=0.5`);
+    });
 
-     // Fade in the intro
-     missionTimeline.fromTo("#mission .intro", {opacity: 0}, {opacity: 1, duration: 0.5});
- 
-     // Fade in each arrow-section sequentially
-     document.querySelectorAll("#mission .arrow-section").forEach((section, index) => {
-         missionTimeline.fromTo(section, {opacity: 0}, {opacity: 1, duration: 0.5}, `+=0.5`);
-     });
- 
-     // Create a ScrollMagic scene
-     new ScrollMagic.Scene({
-         triggerElement: "#mission",
-         triggerHook: 0.5,  // Trigger when #mission is halfway into the viewport
-         reverse: false      // Optionally, do not reverse the animation when scrolling back up
-     })
-     .setTween(missionTimeline)
-     .addTo(controller);
+    new ScrollMagic.Scene({
+        triggerElement: "#mission",
+        triggerHook: 0.5,
+        reverse: false
+    })
+    .setTween(missionTimeline)
+    .addTo(controller);
+
+    var teamTimeline = gsap.timeline();
+    teamTimeline.fromTo("#our-team h2", {opacity: 0}, {opacity: 1, duration: 0.5});
+    document.querySelectorAll("#our-team .team-member").forEach((member, index) => {
+        teamTimeline.fromTo(member, {opacity: 0}, {opacity: 1, duration: 0.5}, `+=0.1`);
+    });
+
+    new ScrollMagic.Scene({
+        triggerElement: "#our-team",
+        triggerHook: 0.5,
+        reverse: false
+    })
+    .setTween(teamTimeline)
+    .addTo(controller);
 });
