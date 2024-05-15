@@ -19,43 +19,59 @@ document.addEventListener('DOMContentLoaded', function () {
         burger.classList.remove('toggle');
     }));
 
-    var homeMissionTimeline = gsap.timeline();
-    homeMissionTimeline.fromTo("#home", {opacity: 1}, {opacity: 0})
-                       .fromTo("#mission", {opacity: 0}, {opacity: 1}, "start+=0.001");
+    // Select all elements that should animate on scroll
+    document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
+        // Create a timeline for this element
+        const elemTimeline = gsap.timeline({ paused: true });
+        elemTimeline.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 1 });
 
-    new ScrollMagic.Scene({
-        triggerElement: "#home",
-        duration: "100%",
-        triggerHook: 0
-    })
-    .setTween(homeMissionTimeline)
-    .addTo(controller);
-
-    var missionTimeline = gsap.timeline();
-    missionTimeline.fromTo("#mission .intro", {opacity: 0}, {opacity: 1, duration: 0.5});
-    document.querySelectorAll("#mission .arrow-section").forEach((section, index) => {
-        missionTimeline.fromTo(section, {opacity: 0}, {opacity: 1, duration: 0.5}, `+=0.5`);
+        // Create scene for each element
+        new ScrollMagic.Scene({
+            triggerElement: el,
+            triggerHook: 0.75,  // Trigger when the element is 75% from the top of the viewport
+            reverse: false      // Animation should not reverse when scrolling back up
+        })
+        .setTween(elemTimeline)
+        .addTo(controller);
     });
+    gsap.registerPlugin(ScrollTrigger);  // Register ScrollTrigger with GSAP
 
-    new ScrollMagic.Scene({
-        triggerElement: "#mission",
-        triggerHook: 0.5,
-        reverse: false
-    })
-    .setTween(missionTimeline)
-    .addTo(controller);
+    const heroSection = document.querySelector('#home');
 
-    var teamTimeline = gsap.timeline();
-    teamTimeline.fromTo("#our-team h2", {opacity: 0}, {opacity: 1, duration: 0.5});
-    document.querySelectorAll("#our-team .team-member").forEach((member, index) => {
-        teamTimeline.fromTo(member, {opacity: 0}, {opacity: 1, duration: 0.5}, `+=0.1`);
+    // Verify that the element exists
+    if (!heroSection) {
+        console.error('Hero section not found!');
+        return;
+    }
+
+    // Zoom and fade out effect for the hero section
+    gsap.to(heroSection, {
+        scale: 1.9,  // Adjust scale as necessary
+        autoAlpha: 0,  // 'autoAlpha' handles both 'opacity' and 'visibility'
+        ease: "none",  // No easing for a linear transition
+        scrollTrigger: {
+            trigger: heroSection,
+            start: "top top",  // Start when the top of the hero section hits the top of the viewport
+            end: "bottom top",  // End when the bottom of the hero section exits the top of the viewport
+            scrub: true,  // Smooth scrubbing effect to sync animation with scroll
+            pin: true,  // Pin the section during the animation
+            onLeaveBack: () => heroSection.style.position = 'absolute', // Unpin the section when animation is complete
+        }
     });
+});
 
-    new ScrollMagic.Scene({
-        triggerElement: "#our-team",
-        triggerHook: 0.5,
-        reverse: false
-    })
-    .setTween(teamTimeline)
-    .addTo(controller);
+
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+            const yOffset = -66; // Height of the fixed navbar
+            const yPosition = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+            window.scrollTo({top: yPosition, behavior: 'smooth'});
+        }
+    });
 });

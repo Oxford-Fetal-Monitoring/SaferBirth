@@ -90,13 +90,14 @@ nav ul li a {
 
 #home {
     opacity: 1; 
+    transform-origin: center center;  /* Ensures scaling occurs from the center */
+    overflow: hidden;  /* Prevents any overflow from the scaling effect */
 }
 
 #mission {
     background-color: #f4f4f4;
     padding: 20px;
     text-align: center;
-    opacity: 0;
 }
 
 .arrow-section {
@@ -191,7 +192,6 @@ nav ul li a {
 
 #mission, #our-team {
     padding-top: 80px;  /* Adjust this value based on the height of your navbar */
-    margin-top: -80px;  /* This should be the same value as padding-top but negative */
 }
 
 /* Media Query for Mobile Devices */
