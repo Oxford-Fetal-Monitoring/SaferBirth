@@ -305,8 +305,8 @@ nav ul li a {
         font-size: large;
         color: #666;
         line-height: 1.4;
-        margin-top: 10px; /* Increased top margin between paragraphs */
-        margin-bottom: 10px; /* Increased bottom margin for spacing */
+        margin-top: 5px; /* Increased top margin between paragraphs */
+        margin-bottom: 15px; /* Increased bottom margin for spacing */
         max-width: 100%; /* Optionally restrict the width of paragraphs */
     }
 }

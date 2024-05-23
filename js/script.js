@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
         navLinks.classList.remove('nav-active');
         navLinks.offsetHeight;  // Trigger reflow to apply transition removal immediately
         navLinks.style.transition = '';  // Reset transition to use CSS value
-
         burger.classList.remove('toggle');
     }));
 
@@ -34,44 +33,30 @@ document.addEventListener('DOMContentLoaded', function () {
         .setTween(elemTimeline)
         .addTo(controller);
     });
-    gsap.registerPlugin(ScrollTrigger);  // Register ScrollTrigger with GSAP
 
+    // Fade out effect for the hero section without scaling
     const heroSection = document.querySelector('#home');
-
-    // Verify that the element exists
-    if (!heroSection) {
-        console.error('Hero section not found!');
-        return;
+    if (heroSection) {
+        new ScrollMagic.Scene({
+            triggerElement: heroSection,
+            triggerHook: 0,  // Start right at the top
+            duration: "100%"  // Covers the whole height of the element
+        })
+        .setTween(gsap.to(heroSection, { opacity: 0 }))
+        .addTo(controller);
     }
 
-    // Zoom and fade out effect for the hero section
-    gsap.to(heroSection, {
-        scale: 1.9,  // Adjust scale as necessary
-        autoAlpha: 0,  // 'autoAlpha' handles both 'opacity' and 'visibility'
-        ease: "none",  // No easing for a linear transition
-        scrollTrigger: {
-            trigger: heroSection,
-            start: "top top",  // Start when the top of the hero section hits the top of the viewport
-            end: "bottom top",  // End when the bottom of the hero section exits the top of the viewport
-            scrub: true,  // Smooth scrubbing effect to sync animation with scroll
-            pin: true,  // Pin the section during the animation
-            onLeaveBack: () => heroSection.style.position = 'absolute', // Unpin the section when animation is complete
-        }
-    });
-});
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                const yOffset = -66; // Height of the fixed navbar
+                const yPosition = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-        if (targetSection) {
-            const yOffset = -66; // Height of the fixed navbar
-            const yPosition = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-            window.scrollTo({top: yPosition, behavior: 'smooth'});
-        }
+                window.scrollTo({top: yPosition, behavior: 'smooth'});
+            }
+        });
     });
 });
