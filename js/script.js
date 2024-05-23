@@ -15,47 +15,48 @@ document.addEventListener('DOMContentLoaded', function () {
         navLinks.classList.remove('nav-active');
         navLinks.offsetHeight;  // Trigger reflow to apply transition removal immediately
         navLinks.style.transition = '';  // Reset transition to use CSS value
-
         burger.classList.remove('toggle');
     }));
 
-    var homeMissionTimeline = gsap.timeline();
-    homeMissionTimeline.fromTo("#home", {opacity: 1}, {opacity: 0})
-                       .fromTo("#mission", {opacity: 0}, {opacity: 1}, "start+=0.001");
+    // Select all elements that should animate on scroll
+    document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
+        // Create a timeline for this element
+        const elemTimeline = gsap.timeline({ paused: true });
+        elemTimeline.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 1 });
 
-    new ScrollMagic.Scene({
-        triggerElement: "#home",
-        duration: "100%",
-        triggerHook: 0
-    })
-    .setTween(homeMissionTimeline)
-    .addTo(controller);
-
-    var missionTimeline = gsap.timeline();
-    missionTimeline.fromTo("#mission .intro", {opacity: 0}, {opacity: 1, duration: 0.5});
-    document.querySelectorAll("#mission .arrow-section").forEach((section, index) => {
-        missionTimeline.fromTo(section, {opacity: 0}, {opacity: 1, duration: 0.5}, `+=0.5`);
+        // Create scene for each element
+        new ScrollMagic.Scene({
+            triggerElement: el,
+            triggerHook: 0.75,  // Trigger when the element is 75% from the top of the viewport
+            reverse: false      // Animation should not reverse when scrolling back up
+        })
+        .setTween(elemTimeline)
+        .addTo(controller);
     });
 
-    new ScrollMagic.Scene({
-        triggerElement: "#mission",
-        triggerHook: 0.5,
-        reverse: false
-    })
-    .setTween(missionTimeline)
-    .addTo(controller);
+    // Fade out effect for the hero section without scaling
+    const heroSection = document.querySelector('#home');
+    if (heroSection) {
+        new ScrollMagic.Scene({
+            triggerElement: heroSection,
+            triggerHook: 0,  // Start right at the top
+            duration: "100%"  // Covers the whole height of the element
+        })
+        .setTween(gsap.to(heroSection, { opacity: 0 }))
+        .addTo(controller);
+    }
 
-    var teamTimeline = gsap.timeline();
-    teamTimeline.fromTo("#our-team h2", {opacity: 0}, {opacity: 1, duration: 0.5});
-    document.querySelectorAll("#our-team .team-member").forEach((member, index) => {
-        teamTimeline.fromTo(member, {opacity: 0}, {opacity: 1, duration: 0.5}, `+=0.1`);
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                const yOffset = -66; // Height of the fixed navbar
+                const yPosition = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+                window.scrollTo({top: yPosition, behavior: 'smooth'});
+            }
+        });
     });
-
-    new ScrollMagic.Scene({
-        triggerElement: "#our-team",
-        triggerHook: 0.5,
-        reverse: false
-    })
-    .setTween(teamTimeline)
-    .addTo(controller);
 });
