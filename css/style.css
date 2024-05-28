@@ -29,7 +29,7 @@ nav {
 
 .navbar-logo img {
     height: auto;  /* Maintain aspect ratio */
-    width: 85px;  /* Set the width of your logo */
+    width: 120px;  /* Set the width of your logo */
     margin-right: auto; /* This pushes everything else to the right */
 }
 
@@ -55,6 +55,7 @@ nav ul li a {
     padding: 10px 40px;        /* Padding around links */
     display: inline-block;     /* Inline block to respect padding */
     line-height: 66px;         /* Center text vertically relative to navbar height */
+    font-size: 1.25rem;
 }
 
 .burger {
@@ -85,7 +86,45 @@ nav ul li a {
 .hero {
     height: 100vh;
     background: url('../images/suitcase-baby-background.jpg') no-repeat center center/cover;
-    background-attachment: fixed;
+    background-size: cover;
+    background-attachment: scroll; /* Change from 'fixed' to 'scroll' */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.hero-content {
+    opacity: 0;  /* Start with hidden content */
+    animation-name: fadeIn;
+    animation-duration: 2s; /* Duration of the animation */
+    animation-fill-mode: forwards; /* Keeps the state at the end of the animation */
+    animation-delay: 2s; /* Delay before the animation starts */
+    background-color: rgba(125, 163, 163, 0.3);  /* Semi-transparent black background rgb(125, 163, 163) */  
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 600px;
+}
+
+.hero h1 {
+    font-size: 3rem;  /* Large text size for primary message */
+    margin-bottom: 0.5em;
+}
+
+.hero p {
+    font-size: 2.5rem;  /* Secondary text size */
+    margin-bottom: 0.5em;
+}
+
+.hero h1, .hero p {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 
 #home {
@@ -138,7 +177,7 @@ nav ul li a {
 }
 
 .intro h1, h2 {
-    padding-bottom: 5vh ;
+    padding-bottom: 5vh;
 }
 
 #our-team {
@@ -202,11 +241,11 @@ nav ul li a {
     }
 
     nav {
-        padding: 0 25px;
+        padding: 0 15px;
     }
 
     .navbar-logo img{
-        width: 75px;  /* Maintain aspect ratio */
+        width: 120px;  /* Maintain aspect ratio */
         height: auto;  /* Set the height of your logo */
     }
 
@@ -263,7 +302,7 @@ nav ul li a {
     }
 
     .rectangle {
-        width: 25%;  /* Adjust width for better responsiveness */
+        width: 30%;  /* Adjust width for better responsiveness */
         height: 40px;  /* Set a fixed height for consistency */
         font-size: 16px;  /* Adjust font size for mobile */
         display: flex;  /* Use flexbox for easier centering */
@@ -308,5 +347,13 @@ nav ul li a {
         margin-top: 5px; /* Increased top margin between paragraphs */
         margin-bottom: 15px; /* Increased bottom margin for spacing */
         max-width: 100%; /* Optionally restrict the width of paragraphs */
+    }
+
+    .hero-content {
+        margin-bottom: 0px;
+    }
+
+    #mission, #our-team {
+        padding-top: 30px;  /* Adjust this value based on the height of your navbar */
     }
 }

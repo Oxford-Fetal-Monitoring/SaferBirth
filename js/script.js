@@ -18,6 +18,13 @@ document.addEventListener('DOMContentLoaded', function () {
         burger.classList.remove('toggle');
     }));
 
+    // Triger the animation for hero-contet to fade-in after loading the page
+    setTimeout(function() {
+        const heroContent = document.querySelector('.hero-content');
+        heroContent.style.opacity = 1; // Ensure it's set to visible if JavaScript needed to manipulate it.
+        heroContent.classList.add('animate'); // If using JS to add a class for animation instead
+    }, 2000); // 2000 milliseconds = 2 seconds
+
     // Select all elements that should animate on scroll
     document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
         // Create a timeline for this element
