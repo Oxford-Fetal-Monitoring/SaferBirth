@@ -84,6 +84,7 @@ nav ul li a {
 }
 
 .hero {
+    padding-top: 66px;
     height: 100vh;
     background: url('../images/suitcase-baby-background.jpg') no-repeat center center/cover;
     background-size: cover;
@@ -231,6 +232,13 @@ nav ul li a {
 
 #mission, #our-team {
     padding-top: 80px;  /* Adjust this value based on the height of your navbar */
+}
+
+/* Media Query for smaller laptop screens */
+@media (max-width: 1700px) {
+    .hero-content {
+        margin-bottom: 500px;
+    }
 }
 
 /* Media Query for Mobile Devices */
